@@ -297,7 +297,7 @@
                 </div>
               </div>
             </td>
-
+            
             <td><img src="/images/<%= $path %>/menu-top-right.gif" /></td>
 
             <td id="about_help"><a href="/About_dictyBase/">About Us</a> <a href=
