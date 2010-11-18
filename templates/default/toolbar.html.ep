@@ -307,3 +307,15 @@
         </table>
       </div>
     </div>
+<script type="text/javascript">
+    				var searchInput = YAHOO.util.Dom.get('search-input');
+    				YAHOO.util.Event.addFocusListener(searchInput.id,
+        		function() {
+            	var initData = searchInput.value;
+            	if (initData.match('use')) {
+                searchInput.value = '';
+        			};
+    		});
+				</script>
+
+

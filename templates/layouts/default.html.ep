@@ -27,9 +27,8 @@
         <%= javascript '/javascripts/yui/build/connection/connection-min.js' %></script>
         <%= javascript '/javascripts/yui/build/json/json-min.js' %></script>
         <%= javascript '/javascripts/menu.js' %></script>
-        
 
-        <title><%= stash 'title' %></title>
+				<title><%= stash 'title' %></title>
     </head>
     <body class="yui-skin-sam">
         <%= $self->render_partial(template => $path.'/toolbar') %>
