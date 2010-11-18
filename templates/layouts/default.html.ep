@@ -1,4 +1,41 @@
-<!doctype html><html>
-    <head><title>Welcome</title></head>
-    <body><%== content %></body>
+% my $path = 'default';
+<!doctype html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+        <%= stylesheet '/javascripts/yui/build/fonts/fonts-min.css' %>
+        <%= stylesheet '/javascripts/yui/build/container/assets/skins/sam/container.css' %>
+        <%= stylesheet '/javascripts/yui/build/menu/assets/skins/sam/menu.css' %>
+        
+        <%= stylesheet '/stylesheets/header.css' %>       
+        <%= stylesheet '/stylesheets/body.css' %>
+        <%= stylesheet '/stylesheets/footer.css' %>
+        
+        <%= stylesheet "/stylesheets/$path/header-skin.css" %>       
+        <%= stylesheet "/stylesheets/$path/body-skin.css" %>
+        <%= stylesheet "/stylesheets/$path/footer-skin.css" %>
+        
+
+        <%= javascript '/javascripts/yui/build/yuiloader/yuiloader-min.js' %></script>
+        <%= javascript '/javascripts/yui/build/yahoo/yahoo-min.js' %></script>
+        <%= javascript '/javascripts/yui/build/yahoo-dom-event/yahoo-dom-event.js' %></script>
+        <%= javascript '/javascripts/yui/build/container/container-min.js' %></script>
+        <%= javascript '/javascripts/yui/build/menu/menu-min.js' %></script>
+        <%= javascript '/javascripts/yui/build/animation/animation-min.js' %></script>
+        <%= javascript '/javascripts/yui/build/element/element-min.js' %></script>
+        <%= javascript '/javascripts/yui/build/connection/connection-min.js' %></script>
+        <%= javascript '/javascripts/yui/build/json/json-min.js' %></script>
+        <%= javascript '/javascripts/menu.js' %></script>
+        
+
+        <title><%= stash 'title' %></title>
+    </head>
+    <body class="yui-skin-sam">
+        <%= $self->render_partial(template => $path.'/toolbar') %>
+        <div id="container">
+            <%= $self->render_inner %>
+        <div id="container">
+        <%= $self->render_partial(template => 'footer') %>
+    </body>
 </html>

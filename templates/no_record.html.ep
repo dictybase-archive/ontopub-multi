@@ -1,0 +1,3 @@
+% layout 'default', title => 'Genomic resource for D.purpureum' ;
+
+<b> Id <%= $id %> not found </b>

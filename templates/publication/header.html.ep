@@ -1,0 +1,33 @@
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td width="10%"><br /></td>
+
+                <td align="center" valign="middle" width="80%"></td>
+
+                <td align="right" valign="middle" width="10%"></td>
+
+                <td align="right" valign="middle" width="10%"></td>
+              </tr>
+            </table>
+
+            <div style=
+            "font-size:25px;font-weight:bold;margin:10px auto 20px auto;width:20%;">
+              dictyBase Curated Paper
+            </div>
+
+            <table align="center">
+              <tr>
+                <td>
+                	Page Contents: <a href="#abstract">Abstract</a> 
+
+                	% if (stash('topics')) {
+                	| <a href="#summary">Summary Chart</a> 
+                	% }
+
+                </td>
+              </tr>
+            </table>
+            <hr size="2" width="75%" />
+
+ 

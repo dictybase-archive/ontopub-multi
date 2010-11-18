@@ -1,0 +1,42 @@
+            <a name="summary">&nbsp;</a>
+
+            % my $genes = stash('genes');
+            % my $rowspan = scalar @$genes;
+            <table border="1" align="center" cellspacing="2" cellpadding="4" width="100%">
+              <tr>
+                <td rowspan="2"></td>
+                <th bgcolor="#869FB6" align="center" colspan="<%= $rowspan %>">Genes addressed in this
+                paper</th>
+              </tr>
+
+              <tr>
+               % for my $name(@$genes) {
+                	<th bgcolor="#B7D8E4" align="center" rowspan="2" valign="center">
+                	<a target="infowin" href= "/gene/<%= $name %>"><%= $name %></a></th>
+							 % }
+              </tr>
+
+
+                <th bgcolor="#869FB6" align="center">Topics in this paper</th>
+
+							 % my $topic2genes = stash('topic2genes');
+							 % my $width = int (80 / scalar @$genes) ;
+							 % for my $topic( grep {$_ ne 'Not yet curated' or $_ eq 'Curated'} keys %$topic2genes) { 
+              	<tr>
+                <td width="20%"><%= $topic %></td>
+
+									% for my $name(@{$topic2genes->{$topic}}) {
+										% if ($name eq 'none') {
+                				<td width="<%= $width %>%"><br /></td>
+                    % }
+                    % else {
+                				<td align="center" width="10%"><a target="infowin" href=
+                				"http://dictybase.org/db/cgi-bin/dictyBase/reference/geneinfo.pl?locus=elmoA&amp;topic=Chemotaxis/Motility">
+                				X</a></td>
+                    % }
+							 % }
+							 %}
+
+              </table>
+              
+            

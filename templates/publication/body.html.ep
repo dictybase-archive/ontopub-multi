@@ -1,0 +1,77 @@
+
+            <table border="0" align="center" cellspacing="3" cellpadding="3" width="600">
+              <tr>
+                <td><font size="+1">
+                
+                % if(defined stash('formatted_authors')) {
+                	<b> <%= stash('formatted_authors') %> (<%= stash('year') %>) </b>
+								% }
+
+								% if(defined stash('pub_title')) {
+									' <%= stash('pub_title') %> '
+								% }
+
+								% if(defined stash('abbreviation')) {
+									<i> <%= stash('abbreviation') %> </i>
+								% }
+
+								% if(defined stash('volume')) {
+									<%= stash('volume') %>  
+								% }
+
+								% if(defined stash('pages')) {
+									<%= stash('pages') %>  
+								% }
+
+								% if(defined stash('pubmed_id')) {
+									% my $link = "window.open('http://view.ncbi.nlm.nih.gov/pubmed/";
+									% $link .= stash('pubmed_id');
+									% $link .= "', 'Reference', '850', '650', 'center','front')";
+                	<br/><a href="#" onclick="<%= $link %>"><img alt="Pubmed Entry"
+                				src="/images/pubmedrefsml.gif" border="0"></a>&nbsp;&nbsp;
+                %}
+
+                % if(defined stash('full_text_url')) {
+									% my $link = "window.open('";
+									% $link .= stash('full_text_url');
+									% $link .= "', 'Reference', '850', '650', 'center','front')";
+                	<a href="#" onclick="<%= $link %>"><img alt="Reference full text"
+                				src="/images/full_text.gif" border="0"></a>
+                	
+                %}
+
+                </font>
+                </td>
+              </tr>
+            </table>
+            
+            <a name="abstract">&nbsp;</a>
+
+            <table border="0" align="center" cellspacing="3" cellpadding="3" width="75%">
+
+            	% if(defined stash('abstract')) {
+              <tr>
+                <td colspan="8"><b>Abstract:</b><%= stash('abstract') %>
+              </tr>
+              % }
+
+              <tr>
+                <td align="right"><font size="-1"><b>Status:</b></font></td>
+                <td align="left"><font size="-1"><%= $pub_status %></font></td>
+
+                <td align="right"><font size="-1"><b>Type:</b></font></td>
+                % my $upper = ucfirst $pub_type;
+                <td align="left"><font size="-1"><%= $upper %></font></td>
+
+                <td align="right"><font size="-1"><b>Source:</b></font></td>
+                <td align="left"><font size="-1"><%= $pub_source %></font></td>
+
+								% if(defined stash('pubmed_id')) {
+                	<td align="right"><font size="-1"><b>PubMed ID:</b></font></td>
+                	<td align="left"><font size="-1"><%= stash('pubmed_id') %></font></td>
+								% }
+
+              </tr>
+            </table>
+            <hr size="2" width="75%" />
+

@@ -1,0 +1,32 @@
+% layout 'default', title => 'Genomic resource for D.purpureum' ;
+
+<div class="wrapper threecol-wide">
+    <div id="subnav">
+        <div class="inner_container"></div>
+    </div>
+    <div class="wrapper-left-center">
+      <div class="wrapper-columns">
+        <div class="column-center">
+          <div id="column-center-content">
+				
+				     <%= include 'publication/header' %>
+				     <%= include 'publication/body' %>
+
+				     % if (defined stash('topic2genes')) {
+				      	% my $topic2genes = stash('topic2genes');
+				     		% if (my @topics = grep { $_ ne 'Not yet curated' or $_ eq 'Curated'} keys %$topic2genes) {
+				     			%= include 'publication/topic' 
+				     		% }
+				     % }
+					
+          </div>
+				</div>
+				<div class="column-left">
+				  <div id="column-left-content"></div>
+				</div>
+				<div class="column-right">
+		  </div>
+		</div>
+</div>
+
+
