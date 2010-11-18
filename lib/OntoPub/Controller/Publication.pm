@@ -117,7 +117,9 @@ sub topics {
                 )
         ];
 
+    WORD:
         for my $word (@$keywords) {
+            next WORD if $word eq 'Curated';
             if ( not defined $topic2genes->{$word} ) {
                 push @{ $topic2genes->{$word} }, 'none'
                     for 0 .. scalar @$genes - 1;
@@ -138,7 +140,16 @@ sub topics {
             }
         }
     }
-    $self->stash( 'topic2genes' => $topic2genes ) if defined $topic2genes;
+
+    if ( defined $topic2genes ) {
+        if ( defined $topic2genes->{'Not yet curated'} ) {
+            my $curated_genes = $topic2genes->{'Not yet curated'};
+            delete $topic2genes->{'Not yet curated'};
+            $self->stash( 'uncurated_genes' => $curated_genes );
+        }
+        $self->stash( 'topic2genes' => $topic2genes ) if keys %$topic2genes > 0;
+    }
+
 }
 
 1;

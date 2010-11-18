@@ -12,11 +12,12 @@
 				     <%= include 'publication/header' %>
 				     <%= include 'publication/body' %>
 
-				     % if (defined stash('topic2genes')) {
-				      	% my $topic2genes = stash('topic2genes');
-				     		% if (my @topics = grep { $_ ne 'Not yet curated' or $_ eq 'Curated'} keys %$topic2genes) {
+				     % if (defined stash('topic2genes') ) {
 				     			%= include 'publication/topic' 
-				     		% }
+				     % }
+
+				     % if (defined stash('uncurated_genes')) {
+				     			%= include 'publication/uncurated' 
 				     % }
 					
           </div>

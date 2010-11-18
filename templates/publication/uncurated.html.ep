@@ -1,0 +1,9 @@
+<center>
+ 	  <b>
+  		% my $uncurated = stash('uncurated_genes');
+  		There are <%= scalar @$uncurated %> 'not yet curated' genes for this paper.
+      % for my $name(@$uncurated) {
+  	    	<a href="/gene/<%= $name %>" target="infowin"><%= $name %> </a> |
+      % }
+	</b>
+</center>	

@@ -19,9 +19,8 @@
 
                 <th bgcolor="#869FB6" align="center">Topics in this paper</th>
 
-							 % my $topic2genes = stash('topic2genes');
 							 % my $width = int (80 / scalar @$genes) ;
-							 % for my $topic( grep {$_ ne 'Not yet curated' or $_ eq 'Curated'} keys %$topic2genes) { 
+							 % for my $topic( keys %$topic2genes) { 
               	<tr>
                 <td width="20%"><%= $topic %></td>
 
@@ -31,12 +30,13 @@
                     % }
                     % else {
                 				<td align="center" width="10%"><a target="infowin" href=
-                				"http://dictybase.org/db/cgi-bin/dictyBase/reference/geneinfo.pl?locus=elmoA&amp;topic=Chemotaxis/Motility">
+                				"/gene/<%= $name %>/references">
                 				X</a></td>
                     % }
-							 % }
+							 		%}
 							 %}
 
               </table>
+
               
             
