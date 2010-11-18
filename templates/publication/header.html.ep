@@ -21,7 +21,7 @@
                 <td>
                 	Page Contents: <a href="#abstract">Abstract</a> 
 
-                	% if (stash('topics')) {
+                	% if (defined stash('topic2genes')) {
                 	| <a href="#summary">Summary Chart</a> 
                 	% }
 
