@@ -1,42 +1,60 @@
             <a name="summary">&nbsp;</a>
 
-            % my $genes = stash('genes');
-            % my $rowspan = scalar @$genes;
-            <table border="1" align="center" cellspacing="2" cellpadding="4" width="100%">
-              <tr>
-                <td rowspan="2"></td>
-                <th bgcolor="#869FB6" align="center" colspan="<%= $rowspan %>">Genes addressed in this
-                paper</th>
-              </tr>
+            % use List::MoreUtils qw/natatime/;
 
+            % my $genes = stash('genes');
+            % my $itr_genes = natatime(8,  @$genes);
+            % my $start = 0;
+            % my $end = 7;
+            % my $first_flag = 0;
+            % while(my @group = $itr_genes->()) {
+            	<table border="1" align="center" cellspacing="2" cellpadding="4" width="100%">
+              	<tr>
+                	<td rowspan="2"></td>
+                	<th bgcolor="#869FB6" align="center" colspan=8>Genes addressed in this
+                	paper</th>
+              	</tr>
               <tr>
-               % for my $name(@$genes) {
+               % for my $name(@group) {
                 	<th bgcolor="#B7D8E4" align="center" rowspan="2" valign="center">
                 	<a target="infowin" href= "/gene/<%= $name %>"><%= $name %></a></th>
 							 % }
               </tr>
 
+              % if ($first_flag) {
+              	% $start = $end + 1;
+              	% $end = $end + scalar @group;
+              %}
 
-                <th bgcolor="#869FB6" align="center">Topics in this paper</th>
 
-							 % my $width = int (80 / scalar @$genes) ;
+               <th bgcolor="#869FB6" align="center" width="10%">Topics in this paper</th>
+
 							 % for my $topic( keys %$topic2genes) { 
               	<tr>
                 <td width="20%"><%= $topic %></td>
 
-									% for my $name(@{$topic2genes->{$topic}}) {
+									% for my $i($start .. $end) {
+										% my $name = $topic2genes->{$topic}->[$i];
 										% if ($name eq 'none') {
-                				<td width="<%= $width %>%"><br /></td>
+                				<td><br /></td>
                     % }
                     % else {
-                				<td align="center" width="10%"><a target="infowin" href=
+                				<td align="center"><a target="infowin" href=
                 				"/gene/<%= $name %>/references">
                 				X</a></td>
                     % }
 							 		%}
+							 		</tr>
+							  %}
+
+							  % $first_flag = 1 if $first_flag == 0;
+
+              	</table>
+              	<br/>
+              	<br/>
+
 							 %}
 
-              </table>
 
               
             
