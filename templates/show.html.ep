@@ -1,4 +1,4 @@
-% layout 'default', title => 'Genomic resource for D.purpureum' ;
+% layout 'default', title => 'Publication record' ;
 
 <div class="wrapper threecol-wide">
     <div id="subnav">

@@ -1,4 +1,5 @@
 % my $e = delete $self->stash->{'exception'};
+<% if ($self->app->mode eq 'development') { %>
 <!doctype html><html>
     <head>
 	    <title>Exception</title>
@@ -12,7 +13,6 @@
 	    </style>
     </head>
     <body>
-        <% if ($self->app->mode eq 'development') { %>
 	        <div>
                 This page was generated from the template
                 "templates/exception.html.ep".
@@ -36,8 +36,8 @@
                 <% } %>
             </div>
             <div class="snippet"><pre><%= dumper $self->stash %></pre></div>
+    				</body>
+						</html>
         <% } else { %>
-            <div>Page temporarily unavailable, please come back later.</div>
+        	 <%= include 'custom_exception' %>
         <% } %>
-    </body>
-</html>
