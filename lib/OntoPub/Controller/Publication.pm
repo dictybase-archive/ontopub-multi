@@ -58,7 +58,7 @@ sub setup_citation {
     }
 
     if ( $pub->has_pages ) {
-    	$self->app->log->debug($pub->pages. ' pages');
+        $self->app->log->debug( $pub->pages . ' pages' );
         ( my $pages = $pub->pages ) =~ s/\-\-/-/;
         $self->stash( 'pages' => $pages );
     }
@@ -104,6 +104,7 @@ sub topics {
     my $pub_id = $pub->pub_id;
     my $schema = $pub->chado;
     my $topic2genes;
+    my $uncurated_genes;
     for my $name (@$genes) {
         my $keywords = [
             map { $_->name }
@@ -118,39 +119,37 @@ sub topics {
                 )
         ];
 
-    WORD:
-        for my $word (@$keywords) {
-            next WORD if $word eq 'Curated';
-            if ( not defined $topic2genes->{$word} ) {
-                push @{ $topic2genes->{$word} }, 'none'
-                    for 0 .. scalar @$genes - 1;
-                my $idx = firstidx { $_ eq $name } @$genes;
-                if ( defined $idx and $idx >= 0 ) {
-                    my @array = @{ $topic2genes->{$word} };
-                    $array[$idx] = $name;
-                    $topic2genes->{$word} = \@array;
+        if ( !@$keywords ) {
+            push @$uncurated_genes, $name;
+        }
+        else {
+        WORD:
+            for my $word (@$keywords) {
+                next WORD if $word eq 'Curated';
+                if ( not defined $topic2genes->{$word} ) {
+                    push @{ $topic2genes->{$word} }, 'none'
+                        for 0 .. scalar @$genes - 1;
+                    my $idx = firstidx { $_ eq $name } @$genes;
+                    if ( defined $idx and $idx >= 0 ) {
+                        my @array = @{ $topic2genes->{$word} };
+                        $array[$idx] = $name;
+                        $topic2genes->{$word} = \@array;
+                    }
                 }
-            }
-            else {
-                my $idx = firstidx { $_ eq $name } @$genes;
-                if ( defined $idx and $idx >= 0 ) {
-                    my @array = @{ $topic2genes->{$word} };
-                    $array[$idx] = $name;
-                    $topic2genes->{$word} = \@array;
+                else {
+                    my $idx = firstidx { $_ eq $name } @$genes;
+                    if ( defined $idx and $idx >= 0 ) {
+                        my @array = @{ $topic2genes->{$word} };
+                        $array[$idx] = $name;
+                        $topic2genes->{$word} = \@array;
+                    }
                 }
             }
         }
     }
 
-    if ( defined $topic2genes ) {
-        if ( defined $topic2genes->{'Not yet curated'} ) {
-            my $curated_genes = $topic2genes->{'Not yet curated'};
-            delete $topic2genes->{'Not yet curated'};
-            $self->stash( 'uncurated_genes' => $curated_genes );
-        }
-        $self->stash( 'topic2genes' => $topic2genes ) if keys %$topic2genes > 0;
-    }
-
+    $self->stash( 'topic2genes' => $topic2genes ) if keys %$topic2genes > 0;
+    $self->stash( 'uncurated_genes' => $uncurated_genes ) if defined $uncurated_genes;
 }
 
 1;
