@@ -58,11 +58,10 @@ sub setup_citation {
     }
 
     if ( $pub->has_pages ) {
-        $self->app->log->debug( $pub->pages . ' pages' );
+        #$self->app->log->debug( $pub->pages . ' pages' );
         ( my $pages = $pub->pages ) =~ s/\-\-/-/;
         $self->stash( 'pages' => $pages );
     }
-
 }
 
 sub setup_linkouts {

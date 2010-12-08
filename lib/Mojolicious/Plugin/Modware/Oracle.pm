@@ -1,4 +1,4 @@
-package Mojolicious::Plugin::Modware;
+package Mojolicious::Plugin::Modware::Oracle;
 
 use strict;
 
@@ -28,7 +28,7 @@ sub register {
             $user     = $database->{user} || '';
             $password = $database->{password} || '';
         }
-        $attr = $database->{attr} || {};
+        $attr = $database->{attr} || { LongReadLen => 2**15 };
     }
     Modware::DataSource::Chado->connect(
         dsn      => $dsn,
@@ -36,7 +36,31 @@ sub register {
         password => $password,
         attr     => $attr
     );
-    my $instance = Modware::DataSource::Chado->instance;
+    my $instance   = Modware::DataSource::Chado->instance;
+    my $source     = $instance->handler->source('Cv::Cvtermsynonym');
+    my $class_name = 'Bio::Chado::Schema::' . $source->source_name;
+    $source->remove_column('synonym');
+    $source->add_column(
+        'synonym_' => {
+            data_type   => 'varchar',
+            is_nullable => 0,
+            size        => 1024
+        }
+    );
+    $class_name->add_column(
+        'synonym_' => {
+            data_type   => 'varchar',
+            is_nullable => 0,
+            size        => 1024
+        }
+    );
+    $class_name->register_column(
+        'synonym_' => {
+            data_type   => 'varchar',
+            is_nullable => 0,
+            size        => 1024
+        }
+    );
 
     if ( !$app->can('modware') ) {
         ref($app)->attr( 'modware' => sub {$instance} );
