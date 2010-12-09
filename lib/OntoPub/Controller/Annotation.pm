@@ -33,9 +33,31 @@ sub index {
     $self->stash( 'definition' => $row->definition );
     $self->stash( 'ontology'   => $row->cv->name );
 
-    my $fcvterm_rs = $schema->resultset('Sequence::FeatureCvterm')
-        ->search( { 'cvterm_id' => $row->cvterm_id } );
-    $self->stash( 'gene_count' => $fcvterm_rs->count );
+    $self->setup_synonym($row);
+
+    my $fcvterm_rs;
+
+    if ( $self->stash('page') ) {
+        my $row_per_page = $self->app->config->{rows};
+        $fcvterm_rs = $schema->resultset('Sequence::FeatureCvterm')->search(
+            { 'cvterm_id' => $row->cvterm_id },
+            {   rows     => $row_per_page,
+                page     => $self->stash('page'),
+                prefetch => 'feature'
+            }
+        );
+        my $total = $fcvterm_rs->pager->total_entries;
+        $self->stash( 'gene_count' => $total );
+        $self->stash( 'pager'      => $fcvterm_rs->pager )
+            if $total >= $row_per_page;
+    }
+    else {
+        $fcvterm_rs
+            = $schema->resultset('Sequence::FeatureCvterm')
+            ->search( { 'cvterm_id' => $row->cvterm_id },
+            { prefetch => 'feature' } );
+        $self->stash( 'gene_count' => $fcvterm_rs->count );
+    }
 
     my $anno_stack;
     while ( my $fcvterm = $fcvterm_rs->next ) {
@@ -49,6 +71,15 @@ sub index {
 
     $self->stash( 'anno_stack' => $anno_stack );
     $self->render('ontology/annotation');
+
+}
+
+sub setup_synonym {
+    my ( $self, $row ) = @_;
+    my $rs = $row->cvtermsynonym_cvterms;
+    if ( $rs->count ) {
+        $self->stash( 'synonyms' => [ map { $_->synonym_ } $rs->all ] );
+    }
 
 }
 

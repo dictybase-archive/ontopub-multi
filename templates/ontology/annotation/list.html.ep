@@ -1,0 +1,84 @@
+<table>
+        <tbody>
+            <tr>
+                <th align="left" bgcolor="#A4ABC2">
+                    Gene
+                </th>
+                <th align="left" bgcolor="#A4ABC2">
+                    Reference(s)
+                </th>
+                <th align="left" bgcolor="#A4ABC2">
+                    Evidence
+                </th>
+            </tr>
+
+						% my $color ;
+						% my $anno_stack = stash('anno_stack');
+						% for my $i(0 .. $#$anno_stack) {
+							% if ($i % 2) {
+								% $color = '#D8D8D8';
+							% }
+							% else {
+								% $color = '#FFFFFF';
+							% }
+							 <tr>
+									<td rowspan="1" bgcolor="<%= $color %>" valign="top" width="10%">
+                    <a href="/gene/<%= $anno_stack->[$i]->[0] %>">
+                    <%= $anno_stack->[$i]->[0] %></a>
+                	</td>
+
+
+                <td bgcolor="<%= $color %>" valign="top" width="70%">
+
+								% my $citation = $anno_stack->[$i]->[1];
+								% if(defined $citation->{formatted_authors}) {
+                	<b> <%= $citation->{formatted_authors} %> (<%= $citation->{year} %>) </b>
+								% }
+
+								% if(defined $citation->{title}) {
+									' <%= $citation->{title} %> '
+								% }
+
+								% if(defined $citation->{abbreviation}) {
+									<i> <%= $citation->{abbreviation} %> </i>
+								% }
+
+								% for my $key(qw/volume pages/) {
+									% if (defined $citation->{$key}) {
+										<%= $citation->{$key} %>
+									% }
+								% }
+
+
+								<br/><a href="/publication/<%= $citation->{dictybase_id} %>"
+									<img src="/images/dictybaserefsml.gif" border="0"></a>&nbsp;
+
+
+								% if(defined $citation->{pubmed_id}) {
+									% my $link = "window.open('http://view.ncbi.nlm.nih.gov/pubmed/";
+									% $link .= $citation->{pubmed_id};
+									% $link .= "', 'Reference', '850', '650', 'center','front')";
+                	<a href="#" onclick="<%= $link %>"><img alt="Pubmed Entry"
+                				src="/images/pubmedrefsml.gif" border="0"></a> &nbsp;
+                % }
+
+                % if(defined $citation->{full_text_url}) {
+									% my $link = "window.open('";
+									% $link .= $citation->{full_text_url};
+									% $link .= "', 'Reference', '850', '650', 'center','front')";
+                	<a href="#" onclick="<%= $link %>"><img alt="Reference full text"
+                				src="/images/full_text.gif" border="0"></a>
+                	
+                % }
+
+								</td>
+
+								<td bgcolor="<%= $color %>" valign="top" width="20%">
+                    <a href="/ontology/<%= $name %>/<%= $id %>/annotation/evidence">
+                    <%= $anno_stack->[$i]->[2] %></a>
+                </td>
+
+							 </tr>
+						% }
+        </tbody>
+    </table>

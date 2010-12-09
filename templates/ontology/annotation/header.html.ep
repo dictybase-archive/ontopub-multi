@@ -1,0 +1,49 @@
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+            <tr>
+                <td width="10%">
+                    <br>
+                </td>
+                <td align="center" valign="middle" width="80%">
+                    <h1>
+                        Gene Ontology: <%= $label %>
+                    </h1>
+                </td>
+                <td align="right" valign="middle" width="10%">
+                    <table cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+
+		% if (defined stash('synonyms')) {
+			 % my $synonyms = stash('synonyms');
+				<h4> The following synonyms are used for this GO term: </h4> 
+				<ul>
+					% for my $name(@$synonyms) {
+						<li><%= $name %> </li>
+					% }
+				</ul>
+		% }
+
+    <b><%= $label %>&nbsp;(<%= $full_id %>):</b> &nbsp; <%= $definition %> (<%= $ontology %> ontology).
+    <p>
+        <b>
+        Use <a href="#"
+        onclick=window.open("http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=<%= $full_id %>","AMIGO","800","650","center","front")>
+        <img src="/images/amigo.png" border="0"/></a> 
+        to view gene products from Dictyostelium and other species annotated to this GO term as well as to browse the gene ontology.
+        </b>
+    </p>
+    <p>
+        <font size="4"><a href="#is"><%= $gene_count %></a> Dictyostelium genes/features have been
+        directly annotated to the term <b><%= $label %></b></font>
+    </p>
+

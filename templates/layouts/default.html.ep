@@ -12,6 +12,7 @@
         <%= stylesheet '/stylesheets/body.css' %>
         <%= stylesheet '/stylesheets/footer.css' %>
         <%= stylesheet '/stylesheets/messages.css' %>
+        <%= stylesheet '/stylesheets/pager.css' %>
         
         <%= stylesheet "/stylesheets/$path/header-skin.css" %>       
         <%= stylesheet "/stylesheets/$path/body-skin.css" %>

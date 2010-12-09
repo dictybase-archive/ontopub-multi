@@ -42,7 +42,9 @@ sub startup {
         ->to('controller-term#show');
 
     # GET /ontology/:namespace/:id/annotation - annotation associated with that term in that ontology 
-    $term->route('/annotation')->via('get')->to('controller-annotation#index');
+    my $more_term = $term->waypoint('/annotation')->via('get')->to('controller-annotation#index');
+    # Above but with paging
+    $more_term->route('/page/:page')->via('get')->to('controller-annotation#index');
 
 }
 

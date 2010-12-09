@@ -1,5 +1,7 @@
 % layout 'default', title => 'Gene ontology record' ;
 
+% my $paging_path = "/ontology/$name/$id/annotation/page";
+
 <div class="wrapper threecol-wide">
     <div id="subnav">
         <div class="inner_container"></div>
@@ -9,126 +11,26 @@
         <div class="column-center">
           <div id="column-center-content">
 				<div class="page-curation">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tbody>
-            <tr>
-                <td width="10%">
-                    <br>
-                </td>
-                <td align="center" valign="middle" width="80%">
-                    <h1>
-                        Gene Ontology: <%= $label %>
-                    </h1>
-                </td>
-                <td align="right" valign="middle" width="10%">
-                    <table cellpadding="0" cellspacing="0">
-                        <tbody>
-                            <tr>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-        </tbody>
-    </table><br>
-    <b><%= $label %>&nbsp;(<%= $full_id %>):</b> &nbsp; <%= $definition %> (<%= $ontology %> ontology).
-    <p>
-        <b>
-        Use <a href="#"
-        onclick=window.open("http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=<%= $full_id %>","AMIGO","800","650","center","front")>
-        <img src="/images/amigo.png" border="0"/></a> 
-        to view gene products from Dictyostelium and other species annotated to this GO term as well as to browse the gene ontology.
-        </b>
-    </p>
-    <p>
-        <font size="4"><a href="#is"><%= $gene_count %></a> Dictyostelium genes/features have been
-        directly annotated to the term <b><%= $label %></b></font>
-    </p>
-    <table>
-        <tbody>
-            <tr>
-                <th align="left" bgcolor="#A4ABC2">
-                    Gene
-                </th>
-                <th align="left" bgcolor="#A4ABC2">
-                    Reference(s)
-                </th>
-                <th align="left" bgcolor="#A4ABC2">
-                    Evidence
-                </th>
-            </tr>
 
-						% my $anno_stack = stash('anno_stack');
-						% for my $anno(@$anno_stack) {
-							% my $gene = $anno->[0];
-							 <tr>
-									<td rowspan="1" bgcolor="#FFFFFF" valign="top" width="10%">
-                    <a href="/gene/<%= $gene %>"><%= $gene %></a>
-                	</td>
-
-
-                <td bgcolor="#FFFFFF" valign="top" width="70%">
-
-								% my $citation = $anno->[1];
-								% if(defined $citation->{formatted_authors}) {
-                	<b> <%= $citation->{formatted_authors} %> (<%= $citation->{year} %>) </b>
-								% }
-
-								% if(defined $citation->{title}) {
-									' <%= $citation->{title} %> '
-								% }
-
-								% if(defined $citation->{abbreviation}) {
-									<i> <%= $citation->{abbreviation} %> </i>
-								% }
-
-								% for my $key(qw/volume pages/) {
-									% if (defined $citation->{$key}) {
-										<%= $citation->{$key} %>
-									% }
-								% }
-
-
-								<br/><a href="/publication/<%= $citation->{dictybase_id} %>"
-									<img src="/images/dictybaserefsml.gif" border="0"></a>&nbsp;
-
-
-								% if(defined $citation->{pubmed_id}) {
-									% my $link = "window.open('http://view.ncbi.nlm.nih.gov/pubmed/";
-									% $link .= $citation->{pubmed_id};
-									% $link .= "', 'Reference', '850', '650', 'center','front')";
-                	<a href="#" onclick="<%= $link %>"><img alt="Pubmed Entry"
-                				src="/images/pubmedrefsml.gif" border="0"></a> &nbsp;
-                % }
-
-                % if(defined $citation->{full_text_url}) {
-									% my $link = "window.open('";
-									% $link .= $citation->{full_text_url};
-									% $link .= "', 'Reference', '850', '650', 'center','front')";
-                	<a href="#" onclick="<%= $link %>"><img alt="Reference full text"
-                				src="/images/full_text.gif" border="0"></a>
-                	
-                % }
-
-								</td>
-
-								<td bgcolor="#FFFFFF" valign="top" width="20%">
-                    <a href="/ontology/<%= $name %>/<%= $id %>/annotation/evidence"><%= $anno->[2] %></a>
-                </td>
-
-							 </tr>
-						% }
-        </tbody>
-    </table><a name="is" id="is"><br></a>
-</div>
-<p>
-    <a name="is" id="is"><!-- Central Column end --></a>
-</p>
-
-				     
 					
-          </div>
+					
+					%= include 'ontology/annotation/header' 
+
+					% if(defined stash('pager')) {
+						<%= include 'pager' ,  paging_path => $paging_path %>
+					% }
+
+
+					%= include 'ontology/annotation/list' 
+					%= include 'ontology/annotation/negated_list' 
+
+					% if(defined stash('pager')) {
+						<%= include 'pager' ,  paging_path => $paging_path %>
+					% }
+
+
+				</div>
+        </div>
 				</div>
 				<div class="column-left">
 				  <div id="column-left-content"></div>
