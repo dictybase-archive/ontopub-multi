@@ -38,6 +38,9 @@
 						</table>
 
    				% }
+   				% else {
+   					<b> No gene/features has been directly annotated to this term </b>
+   				% }
 
 					% if(stash('negated_count')) {
  							% my $count = stash('negated_count');
