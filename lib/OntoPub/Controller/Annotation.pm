@@ -1,6 +1,5 @@
 package OntoPub::Controller::Annotation;
 
-use warnings;
 use strict;
 use Modware::Publication::DictyBase;
 use base 'Mojolicious::Controller';
@@ -35,43 +34,64 @@ sub index {
 
     $self->setup_synonym($row);
 
-    my $fcvterm_rs;
+    my $fcvterm_rs = $schema->resultset('Sequence::FeatureCvterm')->search(
+        { 'cvterm_id' => $row->cvterm_id, 'me.is_not' => 0 },
+        {   prefetch => 'feature',
+            cache    => 1,
+            order_by => { -asc => 'feature.name' }
+        }
+    );
+
+    $self->stash(
+        'gene_count' => $fcvterm_rs->count(
+            'feature', {}, { group_by => 'me.feature_id' }
+        )
+    );
+
+    my $fcvterm_negated_rs
+        = $schema->resultset('Sequence::FeatureCvterm')->search(
+        { 'cvterm_id' => $row->cvterm_id, 'me.is_not' => 1 },
+        {   prefetch => 'feature',
+            cache    => 1,
+        }
+        );
+
+    $self->stash(
+        'negated_count' => $fcvterm_negated_rs->count(
+            'feature', {}, { group_by => 'me.feature_id' }
+        )
+    );
 
     if ( $self->stash('page') ) {
         my $row_per_page = $self->app->config->{rows};
         $fcvterm_rs = $schema->resultset('Sequence::FeatureCvterm')->search(
-            { 'cvterm_id' => $row->cvterm_id },
+            { 'cvterm_id' => $row->cvterm_id, 'me.is_not' => 0 },
             {   rows     => $row_per_page,
                 page     => $self->stash('page'),
-                prefetch => 'feature'
+                prefetch => 'feature',
+                order_by => { -asc => 'feature.name' }
             }
         );
         my $total = $fcvterm_rs->pager->total_entries;
-        $self->stash( 'gene_count' => $total );
-        $self->stash( 'pager'      => $fcvterm_rs->pager )
+        $self->stash( 'pager' => $fcvterm_rs->pager )
             if $total >= $row_per_page;
     }
-    else {
-        $fcvterm_rs
-            = $schema->resultset('Sequence::FeatureCvterm')
-            ->search( { 'cvterm_id' => $row->cvterm_id },
-            { prefetch => 'feature' } );
-        $self->stash( 'gene_count' => $fcvterm_rs->count );
-    }
 
-    my $anno_stack;
-    while ( my $fcvterm = $fcvterm_rs->next ) {
-        my $stack;
-        push @$stack, $fcvterm->feature->name;
-        my $pub = Modware::Publication::DictyBase->find( $fcvterm->pub_id );
-        $self->setup_citation( $pub, $stack );
-        $self->setup_evcode( $fcvterm, $stack );
-        push @$anno_stack, $stack;
-    }
-
-    $self->stash( 'anno_stack' => $anno_stack );
+    $self->setup_annotation( $fcvterm_rs,         'anno_stack' );
+    $self->setup_annotation( $fcvterm_negated_rs, 'negated_stack' );
     $self->render('ontology/annotation');
+}
 
+sub setup_annotation {
+    my ( $self, $rs, $key ) = @_;
+    my $anno_stack;
+    while ( my $fcvterm = $rs->next ) {
+        my $name = $fcvterm->feature->name;
+        my $pub  = Modware::Publication::DictyBase->find( $fcvterm->pub_id );
+        push @{ $anno_stack->{$name}->{pub} },    $self->get_citation($pub);
+        push @{ $anno_stack->{$name}->{evcode} }, $self->get_evcode($fcvterm);
+    }
+    $self->stash( $key => $anno_stack ) if $anno_stack;
 }
 
 sub setup_synonym {
@@ -83,8 +103,8 @@ sub setup_synonym {
 
 }
 
-sub setup_citation {
-    my ( $self, $pub, $anno_stack ) = @_;
+sub get_citation {
+    my ( $self, $pub ) = @_;
     my $author_count = $pub->total_authors;
     my ( $author_str, $citation_stack );
     if ($author_count) {
@@ -119,7 +139,8 @@ sub setup_citation {
     }
 
     if ( $pub->has_pages ) {
-        ( my $pages = $pub->pages ) =~ s/\-\-/-/;
+        my $pages = $pub->pages;
+        $pages =~ s/\-\-/-/;
         $citation_stack->{pages} = $pages;
     }
 
@@ -129,10 +150,10 @@ sub setup_citation {
     $citation_stack->{full_text_url} = $pub->full_text_url
         if $pub->has_full_text_url;
     $citation_stack->{dictybase_id} = $pub->pub_id;
-    push @$anno_stack, $citation_stack;
+    return $citation_stack;
 }
 
-sub setup_evcode {
+sub get_evcode {
     my ( $self, $rs, $anno_stack ) = @_;
     my $prop_rs = $rs->feature_cvtermprops->search_related(
         'type',
@@ -143,7 +164,7 @@ sub setup_evcode {
         { 'type_2.name' => { -in => [qw/EXACT RELATED/] } },
         { join          => 'type' }
         );
-    push @$anno_stack, $prop_rs->first->synonym_;
+    return $prop_rs->first->synonym_;
 }
 
 1;    # Magic true value required at end of module

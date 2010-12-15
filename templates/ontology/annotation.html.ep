@@ -12,22 +12,59 @@
           <div id="column-center-content">
 				<div class="page-curation">
 
-					
-					
 					%= include 'ontology/annotation/header' 
 
 					% if(defined stash('pager')) {
 						<%= include 'pager' ,  paging_path => $paging_path %>
 					% }
 
+   				% if(stash('gene_count')) {
+							<table>
+        					<tbody>
 
-					%= include 'ontology/annotation/list' 
-					%= include 'ontology/annotation/negated_list' 
+        			% if(stash('negated_count')) {
+        					<tr>
+        						<td width="100%" bgcolor="#b7d8e4" colspan="4" rowspan="1">
+        						<font size="4">List of 
+        						<%= $gene_count %> genes/features directly annotated to the term 
+        						<%= $label %></font>
+        					  </td>
+        				  </tr>
+        		  % }
+
+        			<%= include 'ontology/annotation/grid',  stack_name => 'anno_stack' %>
+
+   						</tbody>
+						</table>
+
+   				% }
+
+					% if(stash('negated_count')) {
+ 							% my $count = stash('negated_count');
+
+ 							<br/>
+
+ 							<table><tbody>
+							<tr>
+ 							<td width="100%" bgcolor="#b7d8e4" colspan="4" rowspan="1">
+   						<font size="4">List of <%= $count %> genes/features directly annotated to 
+   							<font color="red"><i>NOT&nbsp;</i></font>a&nbsp; 
+  							<%= $label %>
+								the negated form of the term <%= $label %>
+ 							</font>
+   						</td>
+   						</tr>
+
+   						<%= include 'ontology/annotation/grid',  stack_name => 'negated_stack' %>
+
+			  			</tbody>
+		 				</table>
+				  % }
+
 
 					% if(defined stash('pager')) {
 						<%= include 'pager' ,  paging_path => $paging_path %>
 					% }
-
 
 				</div>
         </div>

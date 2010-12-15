@@ -1,0 +1,252 @@
+% layout 'default', title => 'Gene ontology evidence codes' ;
+
+<div class="wrapper threecol-wide">
+    <div id="subnav">
+        <div class="inner_container"></div>
+    </div>
+    <div class="wrapper-left-center">
+      <div class="wrapper-columns">
+        <div class="column-center">
+          <div id="column-center-content">
+  <div class="page-curation">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tbody>
+        <tr>
+          <td width="10%"><br /></td>
+
+          <td align="center" valign="middle" width="80%">
+            <h1>Evidence Codes for the Gene Ontology (GO)</h1>
+          </td>
+
+          <td align="right" valign="middle" width="10%"></td>
+        </tr>
+      </tbody>
+    </table>This table presents the evidence codes used by the Gene
+    Ontology<sup><font size="-2">TM</font></sup> Consortium, with examples of the types
+    of experiments, data, or statements that are included by each code. The evidence code
+    is linked with a specific GO annotation and literature reference to describe what
+    type of evidence was present in that reference to make the annotation. Additional
+    information about the GO Evidence Codes is available in documentation on the GO site,
+    in <a href="http://www.geneontology.org/doc/GO.evidence.html">GO Evidence Codes</a>.
+
+    <table border="1" cellpadding="4" cellspacing="4" width="100%">
+      <tbody>
+        <tr>
+          <th bgcolor="#A4ABC2">Code</th>
+
+          <th bgcolor="#A4ABC2">Definition</th>
+
+          <th bgcolor="#A4ABC2">Examples</th>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="IC" id="IC"><b>IC</b></a></td>
+
+          <td valign="top"><u><b>I</b></u>nferred <u><b>B</b></u>y
+          <u><b>C</b></u>urator</td>
+
+          <td></td>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="IDA" id="IDA"><b>IDA</b></a></td>
+
+          <td valign="top"><u><b>I</b></u>nferred from <u><b>D</b></u>irect
+          <u><b>A</b></u>ssay</td>
+
+          <td>
+            <ul>
+              <li>Enzyme assays</li>
+
+              <li>In vitro reconstitution</li>
+
+              <li>Immunofluorescence</li>
+
+              <li>Cell fractionation</li>
+
+              <li>Physical interaction/binding assay.</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="IEA" id="IEA"><b>IEA</b></a></td>
+
+          <td valign="top"><u><b>I</b></u>nferred from <u><b>E</b></u>lectronic
+          <u><b>A</b></u>nnotation</td>
+
+          <td>
+            <ul>
+              <li>Annotations based on "hits" in sequence similarity searches, if not
+              curator-reviewed. Annotations transferred from database records, if not
+              curator-reviewed.</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="IEP" id="IEP"><b>IEP</b></a></td>
+
+          <td valign="top"><u><b>I</b></u>nferred from <u><b>E</b></u>xpression
+          <u><b>P</b></u>attern</td>
+
+          <td>
+            <ul>
+              <li>Transcript levels [e.g. Northerns, microarray data]</li>
+
+              <li>Protein levels [e.g. Western blots].</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="IGI" id="IGI"><b>IGI</b></a></td>
+
+          <td valign="top"><u><b>I</b></u>nferred from <u><b>G</b></u>enetic
+          <u><b>I</b></u>nteraction</td>
+
+          <td>
+            <ul>
+              <li>Traditional genetic interactions such as suppressors, synthetic
+              lethals, etc.</li>
+
+              <li>Functional complementation</li>
+
+              <li>Rescue experiments.</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="IMP" id="IMP"><b>IMP</b></a></td>
+
+          <td valign="top"><u><b>I</b></u>nferred from <u><b>M</b></u>utant
+          <u><b>P</b></u>henotype</td>
+
+          <td>
+            <ul>
+              <li>Any gene mutation/knockout</li>
+
+              <li>Overexpression/ectopic expression of wild-type or mutant genes</li>
+
+              <li>Anti-sense experiments</li>
+
+              <li>Specific protein inhibitors.</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="IPI" id="IPI"><b>IPI</b></a></td>
+
+          <td valign="top"><u><b>I</b></u>nferred from <u><b>P</b></u>hysical
+          <u><b>I</b></u>nteraction</td>
+
+          <td>
+            <ul>
+              <li>2-hybrid interactions</li>
+
+              <li>Co-purification</li>
+
+              <li>Co-immunoprecipitation</li>
+
+              <li>Ion/protein binding experiments.</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="ISS" id="ISS"><b>ISS</b></a></td>
+
+          <td valign="top"><u><b>I</b></u>nferred from <u><b>S</b></u>equence or
+          structural <u><b>S</b></u>imilarity</td>
+
+          <td>
+            <ul>
+              <li>Sequence similarity [homolog of/most closely related to]</li>
+
+              <li>Recognized domains</li>
+
+              <li>Structural similarity</li>
+
+              <li>Southern blotting.</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="NAS" id="NAS"><b>NAS</b></a></td>
+
+          <td valign="top"><u><b>N</b></u>on-traceable <u><b>A</b></u>uthor
+          <u><b>S</b></u>tatement</td>
+
+          <td>
+            <ul>
+              <li>Database entries that do not cite a paper [e.g. SwissProt records, YPD
+              protein reports]</li>
+
+              <li>Statements in papers [abstract, introduction, or discussion] that a
+              curator cannot trace to another publication.</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="ND" id="ND"><b>ND</b></a></td>
+
+          <td valign="top"><u><b>N</b></u>o <u><b>B</b></u>iological <u><b>D</b></u>ata
+          <u><b>A</b></u>vailable</td>
+
+          <td></td>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="NR" id="NR"><b>NR</b></a></td>
+
+          <td valign="top"><u><b>N</b></u>ot <u><b>R</b></u>ecorded</td>
+
+          <td>
+            <ul>
+              <li>Used for annotations done before the DICTYBASE curators began tracking
+              evidence types. It should not be used for new annotations.</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="RCA" id="RCA"><b>RCA</b></a></td>
+
+          <td valign="top"><u><b>I</b></u>nferred from <u><b>R</b></u>eviewed
+          <u><b>C</b></u>omputational <u><b>A</b></u>nalysis</td>
+
+          <td></td>
+        </tr>
+
+        <tr>
+          <td valign="top"><a name="TAS" id="TAS"><b>TAS</b></a></td>
+
+          <td valign="top"><u><b>T</b></u>raceable <u><b>A</b></u>uthor
+          <u><b>S</b></u>tatement</td>
+
+          <td>
+            <ul>
+              <li>Anything in a review article where the original experiments are
+              traceable through that article, or in a textbook or dictionary [e.g.
+              "everybody" knows that enolase is a glycolytic enzyme].</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+     </div>
+				</div>
+				<div class="column-left">
+				  <div id="column-left-content"></div>
+				</div>
+				<div class="column-right">
+		  </div>
+		</div>
+</div>
+
+

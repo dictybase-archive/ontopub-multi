@@ -45,5 +45,18 @@
     <p>
         <font size="4"><a href="#is"><%= $gene_count %></a> Dictyostelium genes/features have been
         directly annotated to the term <b><%= $label %></b></font>
+
+        % if(stash('negated_count')) {
+        	% my $count = stash('negated_count');
+        	<br/>
+        	<font size="4"><a href="#isNot"><%= $count %></a> Dictyostelium genes/features have been
+        			directly annotated to 
+        			<b>
+        				<font color="red"><i>NOT&nbsp;</i>a&nbsp;<%= $label %>
+        				</font>
+							</b>
+        			, the negated form of the term <b><%= $label %></b></font>
+        
+        % }
     </p>
 
