@@ -2,7 +2,7 @@ package OntoPub::Controller::Annotation;
 
 use strict;
 use Modware::Publication::DictyBase;
-use base 'Mojolicious::Controller';
+use base 'OntoPub::Controller';
 
 # Other modules:
 
@@ -11,15 +11,7 @@ use base 'Mojolicious::Controller';
 
 sub index {
     my ($self) = @_;
-    my $schema = $self->app->modware->handler;
-    my $rs     = $schema->resultset('Cv::Cvterm')->search(
-        {   'db.name'          => uc $self->stash('name'),
-            'dbxref.accession' => $self->stash('id'),
-            'is_obsolete'      => 0
-        },
-        { join => { 'dbxref' => 'db' }, cache => 1 }
-    );
-
+    my $rs     = $self->get_resultset_from_query;
     if ( !$rs->count ) {
         $self->render('no_record');
         return;
@@ -34,6 +26,7 @@ sub index {
 
     $self->setup_synonym($row);
 
+	my $schema = $rs->result_source->schema;
     my $fcvterm_rs = $schema->resultset('Sequence::FeatureCvterm')->search(
         { 'cvterm_id' => $row->cvterm_id, 'me.is_not' => 0 },
         {   prefetch => 'feature',

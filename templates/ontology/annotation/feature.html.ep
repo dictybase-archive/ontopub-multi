@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Genes with GO term <%= $label %> </title>
+   <%= stylesheet '/stylesheets/style.css' %>       
+   <%= javascript '/javascripts/global.js' %> </script>
+   <%= javascript '/javascripts/form_utils.js' %> </script>
+</head>
+
+<body>
+  <table cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+      <td class="topSpace" width="129"><img src="/images/header_logo.png" border=
+      "0" /></td>
+
+      <td class="popup_header_title">Genes with GO term <%= $label %> </td>
+
+      <td class="topSpace" width="129">&nbsp;</td>
+    </tr>
+
+    <tr>
+      <td class="blue" align="left" height="2" colspan="3"></td>
+    </tr>
+  </table>
+
+      % if (defined stash('features')) {
+  			<table cellspacing="10">
+    			<tr><td>
+      		% my $features = stash('features');
+      		% for my $gene_id(keys %$features) {
+      			  % my $link = "javascript:window.opener.focus();window.opener.location=";
+      			  <a href="#" onclick="<%= $link %>/gene/<%= $gene_id %>;">
+      			  <%= $features->{$gene_id} %> </a><br/>
+      		% }
+      		</td></tr></table>
+      % }
+
+</body>
+</html>

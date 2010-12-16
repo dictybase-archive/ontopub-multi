@@ -42,11 +42,17 @@ sub startup {
         ->to('controller-term#show');
 
     # GET /ontology/:namespace/:id/annotation - annotation associated with that term in that ontology 
+    # GET /ontology/:namespace/:id/annotation/evidence - Only list of evidence codes associated
+    # with that annotaion
+    # GET /ontology/:namespace/:id/annotation/feature - Only list of feature associated
+    # with that annotation
     my $more_term = $term->waypoint('/annotation')->via('get')->to('controller-annotation#index');
     # Above but with paging
     $more_term->route('/page/:page')->via('get')->to('controller-annotation#index');
     # evcode pages
     $more_term->route('/evidence')->via('get')->to('controller-evidence#index');
+    #detail feature
+    $more_term->route('/feature')->via('get')->to('controller-feature#index');
 
 }
 
