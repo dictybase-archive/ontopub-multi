@@ -27,16 +27,18 @@
 									% my $link = "window.open('http://view.ncbi.nlm.nih.gov/pubmed/";
 									% $link .= stash('pubmed_id');
 									% $link .= "', 'Reference', '850', '650', 'center','front')";
-                	<br/><a href="#" onclick="<%= $link %>"><img alt="Pubmed Entry"
-                				src="/images/pubmedrefsml.gif" border="0"></a>&nbsp;&nbsp;
+                	<br/><a href="#" onclick="<%= $link %>">
+                		 <%= image_tag 'refPubmed.gif',  border => '0'  %>
+                		</a>&nbsp;&nbsp;
                 %}
 
                 % if(defined stash('full_text_url')) {
 									% my $link = "window.open('";
 									% $link .= stash('full_text_url');
 									% $link .= "', 'Reference', '850', '650', 'center','front')";
-                	<a href="#" onclick="<%= $link %>"><img alt="Reference full text"
-                				src="/images/full_text.gif" border="0"></a>
+                	<a href="#" onclick="<%= $link %>">
+                <%= image_tag 'refFull.gif',  border => '0',   alt => 'Reference full text' %>
+                </a>
                 	
                 %}
 

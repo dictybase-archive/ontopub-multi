@@ -10,13 +10,13 @@
                 <td style="text-align:right;">
                     &nbsp;Supported by NIH (NIGMS and NHGRI)&nbsp;
                     <a href="http://www.nih.gov/">
-                        <img src="/images/nih_sm.gif"/>
+                        <%= image_tag 'nih_sm.gif' %>
                     </a>
                     <a href="http://geneontology.org">
-                        <img src="/images/go_sm.gif"/>
+                        <%= image_tag 'go_sm.gif' %>
                     </a>
                     <a href="http://gmod.org/wiki/Main_Page">
-                        <img src="/images/gmod.gif"/>
+                        <%= image_tag 'gmod.gif' %>
                     </a>
                 </td>
             </tr>

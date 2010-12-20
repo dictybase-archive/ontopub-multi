@@ -11,6 +11,7 @@ sub startup {
     #yaml and bcs plugins
     $self->plugin('yml_config');
     $self->plugin('modware-oracle');
+    $self->plugin('asset_tag_helpers');
 
     # Routes
     my $r = $self->routes;
@@ -23,10 +24,14 @@ sub startup {
     # DELETE /publication/id - destroy that publication record xxxxxx
     # PUT /publication/id - update that publication xxxxx
 
+
     my $publication = $r->waypoint('/publication')->via('get')
         ->to('controller-publication#index');
     $publication->route('/:id')->via('get')
         ->to('controller-publication#show');
+
+    # GET /publication/pubmed/id - detail about publication with a pubmed id
+	$publication->route('/pubmed/:pubmed_id')->via('get')->to('controller-publication#show_pubmed');
 
 	# GET /ontology - List of ontology [xxxx]
     # POST /ontology - Add ontology list [xxxx]
@@ -53,6 +58,7 @@ sub startup {
     $more_term->route('/evidence')->via('get')->to('controller-evidence#index');
     #detail feature
     $more_term->route('/feature')->via('get')->to('controller-feature#index');
+
 
 }
 

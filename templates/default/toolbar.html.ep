@@ -8,12 +8,11 @@
 
         <table>
           <tr>
-            <td rowspan="2"><a href="/"><img src="/images/<%= $path %>/logo.gif" /></a></td>
+            <td rowspan="2"><a href="/"><%= image_tag "$path/logo.gif" %></a></td>
 
             <td colspan="4">
               <div id="container-help">
-                <img src="/images/<%= $path %>/help-left.gif" />
-
+                <%= image_tag "$path/help-left.gif" %>
                 <div>
                   <form action="/db/cgi-bin/search/search.pl">
                     <input id="search-input" name="query" type="text" size="30" value=
@@ -21,14 +20,11 @@
                     "submit" value="Search All" /> <input type="submit" name="genes_only"
                     value="Gene Names Only" /></nobr>
                   </form>
-                </div>
-                                    <img src="/images/<%= $path %>/help-right.gif">
-              </div>
             </td>
           </tr>
 
           <tr class="menu">
-            <td><img src="/images/<%= $path %>/menu-top-left.gif" /></td>
+            <td><%= image_tag "$path/menu-top-left.gif" %></td>
             <td>
               <div id="menu-top" class="yuimenubar yuimenubarnav">
                 <div class="bd">
@@ -298,7 +294,7 @@
               </div>
             </td>
             
-            <td><img src="/images/<%= $path %>/menu-top-right.gif" /></td>
+            <td><%= image_tag "$path/menu-top-right.gif" %></td>
 
             <td id="about_help"><a href="/About_dictyBase/">About Us</a> <a href=
             "/db/cgi-bin/dictyBase/suggestion">Contact</a> <a href=

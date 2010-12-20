@@ -9,16 +9,10 @@ use base 'Mojolicious::Controller';
 
 # This action will render a template
 sub show {
-    my $self   = shift;
-    my $id     = $self->stash('id');
-    my $source = $self->param('source');
-    my $pub;
-    if ( defined $source and $source =~ /pubmed/i ) {
-        $pub = Modware::Publication::DictyBase->find_by_pubmed_id($id);
-    }
-    else {
-        $pub = Modware::Publication::DictyBase->find($id);
-    }
+    my $self = shift;
+    my $id   = $self->stash('id');
+    my $pub  = Modware::Publication::DictyBase->find($id);
+
     if ($pub) {
         $self->setup_citation($pub);
         $self->setup_linkouts($pub);
@@ -30,6 +24,25 @@ sub show {
     else {
         $self->render('no_record');
     }
+}
+
+sub show_pubmed {
+    my ($self) = @_;
+    my $pubmed_id = $self->stash('pubmed_id');
+    my $pub = Modware::Publication::DictyBase->find_by_pubmed_id($pubmed_id);
+
+    if ($pub) {
+        $self->setup_citation($pub);
+        $self->setup_linkouts($pub);
+        $self->setup_body($pub);
+        $self->included_genes($pub);
+        $self->topics($pub);
+        $self->render('show');
+    }
+    else {
+        $self->render('no_record');
+    }
+
 }
 
 sub setup_citation {
@@ -58,6 +71,7 @@ sub setup_citation {
     }
 
     if ( $pub->has_pages ) {
+
         #$self->app->log->debug( $pub->pages . ' pages' );
         ( my $pages = $pub->pages ) =~ s/\-\-/-/;
         $self->stash( 'pages' => $pages );
@@ -148,7 +162,8 @@ sub topics {
     }
 
     $self->stash( 'topic2genes' => $topic2genes ) if keys %$topic2genes > 0;
-    $self->stash( 'uncurated_genes' => $uncurated_genes ) if defined $uncurated_genes;
+    $self->stash( 'uncurated_genes' => $uncurated_genes )
+        if defined $uncurated_genes;
 }
 
 1;

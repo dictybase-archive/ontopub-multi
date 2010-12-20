@@ -58,23 +58,24 @@
 
 										<br/>
 										<a href="/publication/<%= $citation->{dictybase_id} %>"
-										<img src="/images/dictybaserefsml.gif" border="0"></a>&nbsp;
+										<%= image_tag 'refDicty.gif', border => '0' %> </a>&nbsp;
 
 
 										% if(defined $citation->{pubmed_id}) {
 											% my $link = "window.open('http://view.ncbi.nlm.nih.gov/pubmed/";
 											% $link .= $citation->{pubmed_id};
 											% $link .= "', 'Reference', '850', '650', 'center','front')";
-                			<a href="#" onclick="<%= $link %>"><img alt="Pubmed Entry"
-                				src="/images/pubmedrefsml.gif" border="0"></a> &nbsp;
+                			<a href="#" onclick="<%= $link %>">
+                			<%= image_tag 'refPubmed.gif',  border => '0' %> </a>&nbsp;
+
                 	  % }
 
                 		% if(defined $citation->{full_text_url}) {
 											% my $link = "window.open('";
 											% $link .= $citation->{full_text_url};
 											% $link .= "', 'Reference', '850', '650', 'center','front')";
-                			<a href="#" onclick="<%= $link %>"><img alt="Reference full text"
-                				src="/images/full_text.gif" border="0"></a>
+                			<a href="#" onclick="<%= $link %>">
+                			<%= image_tag	'refFull.gif', border => '0' %></a>
                 	
                 	  % }
 

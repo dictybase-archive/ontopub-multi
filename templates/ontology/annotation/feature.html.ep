@@ -9,8 +9,8 @@
 <body>
   <table cellspacing="0" cellpadding="0" width="100%">
     <tr>
-      <td class="topSpace" width="129"><img src="/images/header_logo.png" border=
-      "0" /></td>
+      <td class="topSpace" width="129"> <%= image_tag 'header_logo.png' %> 
+      </td>
 
       <td class="popup_header_title">Genes with GO term <%= $label %> </td>
 
