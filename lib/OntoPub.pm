@@ -8,7 +8,6 @@ use base 'Mojolicious';
 sub startup {
     my $self = shift;
 
-    #yaml and bcs plugins
     $self->plugin('yml_config');
     $self->plugin('modware-oracle');
     $self->plugin('asset_tag_helpers');
