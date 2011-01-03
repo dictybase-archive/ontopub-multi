@@ -84,7 +84,7 @@
 										% my $evcode = $anno_stack->{$gene_name}->{evcode}->[$i];
 
 										<td bgcolor="<%= $color %>" valign="top" width="20%">
-                    	<a href="/ontology/<%= $name %>/<%= $id %>/annotation/evidence">
+                    	<a href="/ontology/<%= $name %>/evidence">
                     	<%= $evcode %></a>
                 		</td>
 							 		 </tr>

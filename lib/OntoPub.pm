@@ -41,6 +41,11 @@ sub startup {
     my $name = $onto->waypoint('/:name')->via('get')
         ->to('controller-ontology#show');
 
+    # GET /ontology/:namespace/evidence - Detail about evidence codes, currently works
+    # with Gene ontology one (go)
+    # evcode pages
+    $name->route('/evidence')->via('get')->to('controller-evidence#index');
+
     # GET /ontology/:namespace/:id - detail about term  in that ontology [xxxxx]
     my $term = $name->waypoint('/:id')->via('get')
         ->to('controller-term#show');
@@ -53,8 +58,6 @@ sub startup {
     my $more_term = $term->waypoint('/annotation')->via('get')->to('controller-annotation#index');
     # Above but with paging
     $more_term->route('/page/:page')->via('get')->to('controller-annotation#index');
-    # evcode pages
-    $more_term->route('/evidence')->via('get')->to('controller-evidence#index');
     #detail feature
     $more_term->route('/feature')->via('get')->to('controller-feature#index');
 
