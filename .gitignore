@@ -13,3 +13,5 @@ log
 Build
 development*
 deploy*
+_build
+MYMETA.yml
