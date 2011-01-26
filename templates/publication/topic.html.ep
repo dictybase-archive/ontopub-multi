@@ -32,9 +32,10 @@
 							 % for my $topic( keys %$topic2genes) { 
               	<tr>
                 <td width="20%"><%= $topic %></td>
-
+									% NAME:
 									% for my $i($start .. $end) {
 										% my $name = $topic2genes->{$topic}->[$i];
+										% next NAME if not defined $name;
 										% if ($name eq 'none') {
                 				<td><br /></td>
                     % }
