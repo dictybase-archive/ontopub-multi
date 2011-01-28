@@ -38,7 +38,7 @@
         <%= $self->render_partial(template => $path.'/toolbar') %>
         <div id="container">
             <%= $self->render_inner %>
-        <div id="container">
+				</div>
         <%= $self->render_partial(template => 'footer') %>
 
 		    % if ($self->app->mode eq 'production') {
