@@ -36,9 +36,9 @@ sub index {
     );
 
     $self->stash(
-        'gene_count' => $fcvterm_rs->count(
+        'gene_count' => $fcvterm_rs->search_related( 
             'feature', {}, { group_by => 'me.feature_id' }
-        )
+        )->count
     );
 
     my $fcvterm_negated_rs
