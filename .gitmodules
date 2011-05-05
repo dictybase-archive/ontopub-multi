@@ -1,0 +1,3 @@
+[submodule "public"]
+	path = public
+	url = ssh://ubuntu@testpurpureum.dictybase.org/home/ubuntu/git/assets.git
