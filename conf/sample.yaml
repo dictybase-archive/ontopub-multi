@@ -3,4 +3,6 @@ database:
  user: CGM_CHADO
  password: CGM_CHADO
 
+toolbar: multi
+
 
