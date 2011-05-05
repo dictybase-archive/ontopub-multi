@@ -1,4 +1,5 @@
 % my $path = 'default';
+% my $toolbar = $self->app->config->{toolbar} ? $self->app->config->{toolbar} : $path;
 <!doctype html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -35,7 +36,7 @@
 				<title><%= stash 'title' %></title>
     </head>
     <body class="yui-skin-sam">
-        <%= $self->render_partial(template => $path.'/toolbar') %>
+        <%= $self->render_partial(template => 'toolbar/'.$toolbar) %>
         <div id="container">
             <%= $self->render_inner %>
 				</div>
