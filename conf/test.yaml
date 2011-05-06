@@ -1,6 +1,0 @@
-database:
- dsn: "dbi:Oracle:host=192.168.60.10;sid=dictybase"
- user: CGM_CHADO
- password: CGM_CHADO
-
-
