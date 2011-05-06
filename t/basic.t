@@ -2,13 +2,13 @@
 
 use strict;
 use warnings;
-
-use Test::More tests => 5;
 use Test::Mojo;
 
 use_ok('OntoPub');
 
 # Test
 my $t = Test::Mojo->new(app => 'OntoPub');
-$t->get_ok('/')->status_is(200)->content_type_is('text/html')
-  ->content_like(qr/Mojolicious Web Framework/i);
+my $app = $t->get_ok('/publication/pubmed/21356102');
+$app->status_is(200);
+$app->content_type_is('text/html');
+$app->text_is('html head title' => 'Publication record',  'It matches the title');
