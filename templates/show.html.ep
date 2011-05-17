@@ -1,4 +1,4 @@
-% layout 'default', title => 'Publication record' ;
+% layout 'default', title => 'dictyBase Literature' ;
 
 <div class="wrapper threecol-wide">
     <div id="subnav">

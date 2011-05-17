@@ -16,7 +16,7 @@ my $app = $t->get_ok('/publication/pubmed/21356102');
 $app->status_is(200);
 $app->content_type_like( qr/html/, 'It has html document' );
 $app->text_is(
-    'html head title' => 'Publication record',
+    'html head title' => 'dictyBase Literature',
     'It matches the title'
 );
 $app->text_is(
