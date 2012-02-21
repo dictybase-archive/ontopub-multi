@@ -28,7 +28,13 @@
                                                   <li class="yuimenuitem">
                                                       <a class="yuimenuitemlabel" href="/purpureum">Dictyostelium purpureum</a>
                                                   </li>
-                                              </ul>
+                                             			<li class="yuimenuitem">
+                                                		<a class="yuimenuitemlabel" href="/fasciculatum">Dictyostelium fasciculatum</a>
+                                             			</li>
+                                             			<li class="yuimenuitem">
+                                                		<a class="yuimenuitemlabel" href="/pallidum">Polysphondylium pallidum</a>
+																						 			</li>
+                                              	</ul>
                                           </div>
                                       </div>
                                   </li>
@@ -37,12 +43,22 @@
                                       <div id="gbrowse" class="yuimenu">
                                           <div class="bd">
                                               <ul class="first-of-type">
-                                                  <li class="yuimenuitem">
-                                                      <a class="yuimenuitemlabel" href="http://dictybase.org/db/cgi-bin/ggb/gbrowse/?name=1:1..30000">Dictyostelium discoideum</a>
-                                                  </li>                                                            
-                                                  <li class="yuimenuitem">
-                                                      <a class="yuimenuitemlabel" href="/purpureum/gbrowse/?name=scaffold_1:1..30000">Dictyostelium purpureum</a>
-                                                  </li>
+                                               <li class="yuimenuitem">
+                                                <a class="yuimenuitemlabel"
+                                                      href="/browser/gbrowse/discoideum?name=6:1..50000">Dictyostelium discoideum</a>
+                                             	 </li>
+																						   <li class="yuimenuitem">
+                                                <a class="yuimenuitemlabel"
+                                                      href="/browser/gbrowse/purpureum?name=scaffold_193:1..50000">Dictyostelium purpureum</a>
+                                               </li>
+																						   <li class="yuimenuitem">
+                                                <a class="yuimenuitemlabel"
+                                                      href="/browser/gbrowse/fasciculatum?name=GL883026:1..50000">Dictyostelium fasciculatum</a>
+                                               </li>
+																						   <li class="yuimenuitem">
+                                                <a class="yuimenuitemlabel"
+                                                      href="/browser/gbrowse/pallidum?name=GL290988:1..50000">Polysphondylium pallidum</a>
+                                               </li>
                                               </ul>
                                           </div>
                                       </div>
@@ -55,13 +71,24 @@
                                       <div id="download" class="yuimenu">
                                           <div class="bd">
                                               <ul class="first-of-type">
-                                                  <li class="yuimenuitem">
-                                                      <a class="yuimenuitemlabel" href="/discoideum/Downloads/">Dictyostelium discoideum</a>
-                                                  </li>                                                             
-                                                  <li class="yuimenuitem">
-                                                      <a class="yuimenuitemlabel" href="/purpureum/downloads/">Dictyostelium purpureum</a>
-                                                  </li>                                                                                                                       
-                                              </ul>
+
+                                             	 <li class="yuimenuitem">
+                                                 <a class="yuimenuitemlabel"
+                                                      href="/discoideum/current">Dictyostelium discoideum</a>
+                                               </li>
+																						   <li class="yuimenuitem">
+                                                <a class="yuimenuitemlabel"
+                                                      href="/purpureum/current">Dictyostelium purpureum</a>
+                                               </li>
+																						   <li class="yuimenuitem">
+                                                <a class="yuimenuitemlabel"
+                                                      href="/fasciculatum/current">Dictyostelium fasciculatum</a>
+                                              </li>
+																						  <li class="yuimenuitem">
+                                                <a class="yuimenuitemlabel"
+                                                      href="/pallidum/current">Polysphondylium pallidum</a>
+                                              </li>
+                                             </ul>
                                           </div>
                                       </div>
                                   </li>
