@@ -1,5 +1,3 @@
-% my $path = 'default';
-% my $toolbar = $self->app->config->{toolbar} ? $self->app->config->{toolbar} : $path;
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -18,7 +16,7 @@
         % }
 
         % for my $skin(('header-skin','body-skin','footer-skin')) {
-        	<%= stylesheet_link_tag "$path/$skin" %>
+        	<%= stylesheet_link_tag "default/$skin" %>
         % }
 
         <%= javascript_include_tag 'yui/build/yuiloader/yuiloader-min' %>
@@ -36,16 +34,13 @@
 				<title><%= stash 'title' %></title>
     </head>
     <body class="yui-skin-sam">
-        <%= $self->render_partial(template => 'toolbar/'.$toolbar) %>
+        %= include 'toolbar/multi'
         <div id="container">
             <%= $self->render_inner %>
 				</div>
-        <%= $self->render_partial(template => 'footer') %>
-
-
+        %= include 'footer'
 		    % if ($self->app->mode eq 'production') {
 		    	%= include 'google'	
 		    %}
-
     </body>
 </html>
