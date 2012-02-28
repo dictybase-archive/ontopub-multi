@@ -79,7 +79,7 @@ sub setup_citation {
 
 sub setup_linkouts {
     my ( $self, $pub ) = @_;
-    if ( $pub->id !~ /^PUB/ or $pub->id =~ /^\d+/ ) {
+    if ( $pub->source eq 'PUBMED' ) {
         $self->stash( 'pubmed_id' => $pub->id );
     }
     $self->stash( 'full_text_url' => $pub->full_text_url )
