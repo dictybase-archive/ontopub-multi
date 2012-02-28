@@ -2,7 +2,7 @@
 *.yaml
 
 #exclude various folder
-conf
+#conf
 log
 
 #however exclude the sample conf
