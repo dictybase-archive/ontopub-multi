@@ -3,8 +3,7 @@ package OntoPub::Controller::Publication;
 use strict;
 use warnings;
 use Modware::Publication::DictyBase;
-use List::MoreUtils qw/firstidx/;
-use Data::Dumper;
+#use List::MoreUtils qw/firstidx/;
 use base 'Mojolicious::Controller';
 
 # This action will render a template
@@ -17,8 +16,8 @@ sub show {
         $self->setup_citation($pub);
         $self->setup_linkouts($pub);
         $self->setup_body($pub);
-        $self->included_genes($pub);
-        $self->topics($pub);
+        #$self->included_genes($pub);
+        #$self->topics($pub);
         $self->render('show');
     }
     else {
