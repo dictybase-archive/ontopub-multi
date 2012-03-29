@@ -1,4 +1,4 @@
-% layout 'default', title => 'dictyBase Literature' ;
+% layout 'publication', title => 'dictyBase Literature' ;
 
 <div class="wrapper threecol-wide">
     <div id="subnav">
@@ -12,14 +12,6 @@
 				     <%= include 'publication/header' %>
 				     <%= include 'publication/body' %>
 
-				     % if (defined stash('topic2genes') ) {
-				     			%= include 'publication/topic' 
-				     % }
-
-				     % if (defined stash('uncurated_genes')) {
-				     			%= include 'publication/uncurated' 
-				     % }
-					
           </div>
 				</div>
 				<div class="column-left">

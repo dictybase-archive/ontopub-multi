@@ -11,7 +11,7 @@
 				<link type="text/css" rel="stylesheet" media="screen" 
         href="<%= stylesheet_path '/javascripts/yui/build/menu/assets/skins/sam/menu.css' %>" />
 
-        % for my $css(qw/header body footer messages pager/) {
+        % for my $css(qw/header body footer messages/) {
         	 <%= stylesheet_link_tag $css %>
         % }
 
