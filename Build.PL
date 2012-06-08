@@ -29,7 +29,8 @@ my $builder = $class->new(
         'Plack'                       => '0.9941',
         'FCGI::Engine'                => '0.16',
         'Mojolicious::Plugin::Bundle' => '0.001',
-        'List::MoreUtils'             => '0.30'
+        'List::MoreUtils'             => '0.30',
+        'DBIx::Class'                 => '0.08127'
     },
     add_to_cleanup => ['OntoPub-*'],
     create_readme  => 1,

@@ -60,6 +60,10 @@ echo "-------> using lib $LOCAL_LIB"
 export PERLBREW_ROOT=$PERLBREW_ROOT
 export PERLBREW_HOME=$PERLBREW_HOME
 source $PERLBREW_ROOT/etc/bashrc
+
+# install carton
+cpanm -n Carton
+
 perlbrew use $LOCAL_LIB
 
 cd $APP_DIR
