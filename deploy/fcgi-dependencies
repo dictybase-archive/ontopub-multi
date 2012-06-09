@@ -17,8 +17,8 @@ curl -o modware.tar.gz -k -L https://github.com/dictyBase/Modware/tarball/develo
     && carton install modware.tar.gz && rm modware.tar.gz
 
 echo " ----> Installing mojolicious 1.21"
-curl -o mojolicious.zip -k -L https://github.com/kraih/mojo/zipball/v1.21 \
-    && carton install mojolicious.zip && rm mojolicious.zip
+curl -o mojolicious.tar.gz -k -L https://github.com/kraih/mojo/tarball/v1.21 \
+    && carton install mojolicious.tar.gz && rm mojolicious.tar.gz
 
 carton install
 
