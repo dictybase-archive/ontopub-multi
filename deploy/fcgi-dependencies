@@ -7,8 +7,20 @@ cpanm=$1
 APP_DIR=$2
 
 cd $2
-echo "------> Installing dependencies"
-$cpanm --installdeps -n .
+echo "------> Installing dependencies ......... "
+
+echo "------> Installing DBIx::Class 0.08127"
+carton install http://cpan.metacpan.org/authors/id/A/AB/ABRAXXA/DBIx-Class-0.08127.tar.gz
+
+echo " -----> Installing modware"
+curl -o modware.tar.gz -k -L https://github.com/dictyBase/Modware/tarball/develop \
+    && carton install modware.tar.gz && rm modware.tar.gz
+
+echo " ----> Installing mojolicious 1.21"
+curl -o mojolicious.zip -k -L https://github.com/kraih/mojo/zipball/v1.21 \
+    && carton install mojolicious.zip && rm mojolicious.zip
+
+carton install
 
 echo "------> Installing plack and dependencies for fcgi deployment"
-$cpanm -n Plack FCGI FCGI::ProcManager FCGI::Engine
+carton install FCGI::ProcManager
