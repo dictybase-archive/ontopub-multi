@@ -23,3 +23,5 @@ Build
 _build
 MYMETA.yml
 Rexfile
+.carton/
+local/
