@@ -30,7 +30,9 @@ my $builder = $class->new(
         'FCGI::Engine'                => '0.16',
         'Mojolicious::Plugin::Bundle' => '0.001',
         'List::MoreUtils'             => '0.30',
-        'DBIx::Class'                 => '0.08127'
+        'DBIx::Class'                 => '0.08127',
+        'Math::BigInt'                => '1.99',
+        'Math::Base36'                => '0.09'
     },
     add_to_cleanup => ['OntoPub-*'],
     create_readme  => 1,
