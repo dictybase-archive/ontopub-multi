@@ -32,7 +32,8 @@ my $builder = $class->new(
         'List::MoreUtils'             => '0.30',
         'DBIx::Class'                 => '0.08127',
         'Math::BigInt'                => '1.99',
-        'Math::Base36'                => '0.09'
+        'Math::Base36'                => '0.09',
+        'DBD::Oracle'                 => '1.27'
     },
     add_to_cleanup => ['OntoPub-*'],
     create_readme  => 1,
