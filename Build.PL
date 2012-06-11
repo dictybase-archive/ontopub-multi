@@ -33,6 +33,7 @@ my $builder = $class->new(
         'DBIx::Class'                 => '0.08127',
         'Math::BigInt'                => '1.99',
         'Math::Base36'                => '0.09',
+        'DBI'                         => '1.51',
         'DBD::Oracle'                 => '1.27'
     },
     add_to_cleanup => ['OntoPub-*'],
