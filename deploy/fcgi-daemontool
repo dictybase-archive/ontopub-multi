@@ -7,7 +7,7 @@ RUN_FILE=$2
 LOCAL_LIB=$3
 APP_DIR=$4
 
-if ! [ -z "$MOJO_MODE" ];then 
+if [ -z "$MOJO_MODE" ];then 
   MOJO_MODE=production
 fi
 

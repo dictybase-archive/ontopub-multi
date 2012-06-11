@@ -30,12 +30,12 @@ setup_daemontool() {
 }
 
 copy_encrypted_config() {
-	if ! [ -z "$MOJO_MODE" ]; then
+	if [ -z "$MOJO_MODE" ]; then
 	    MOJO_MODE='production'
 	fi
 
 	actual_config=${CONFIG_FOLDER}/${PROJECT}/${MOJO_MODE}.yml
-	sample_config=${APP_DIR}/config/sample.yml
+	sample_config=${APP_DIR}/conf/sample.yml
 
      
   if [ -e "$sample_config" ] && [ -e "$actual_config" ]; then
