@@ -10,7 +10,7 @@ LOCAL_LIB=$PERL_VERSION\@$PROJECT
 SERVICE=$APP_DIR/service
 APP_SERVICE=$SERVICE/${PROJECT}runner
 RUN_FILE=$APP_SERVICE/run
-ENCRYPT_CONFIG_FOLDER=$4
+CONFIG_FOLDER=$4
 cpanm=$PERLBREW_ROOT/bin/cpanm
 perlbrew=$PERLBREW_ROOT/bin/perlbrew
 
@@ -22,7 +22,9 @@ setup_daemontool() {
 
 		chmod 1755 $APP_SERVICE
 		chmod 755 $RUN_FILE
-		ln -s $APP_SERVICE /service/$PROJECT
+		if ! [ -e "/service/${PROJECT}" ]; then
+		   ln -s $APP_SERVICE /service/${PROJECT}
+		fi
 	fi
 
 }
@@ -32,7 +34,7 @@ copy_encrypted_config() {
 	    MOJO_MODE='production'
 	fi
 
-	actual_config=${ENC_CONFIG_FOLDER}/${PROJECT}/${MOJO_MODE}.yml
+	actual_config=${CONFIG_FOLDER}/${PROJECT}/${MOJO_MODE}.yml
 	sample_config=${APP_DIR}/config/sample.yml
 
      
