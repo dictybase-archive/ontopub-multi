@@ -22,7 +22,7 @@ setup_daemontool() {
 
 		chmod 1755 $APP_SERVICE
 		chmod 755 $RUN_FILE
-		if ! [ -e "/service/${PROJECT}" ]; then
+		if  [ ! -h "/service/${PROJECT}" ]; then
 		   ln -s $APP_SERVICE /service/${PROJECT}
 		fi
 	fi
@@ -38,11 +38,11 @@ copy_encrypted_config() {
 	sample_config=${APP_DIR}/conf/sample.yml
 
      
-  if [ -e "$sample_config" ] && [ -e "$actual_config" ]; then
+  if [ -f $actual_config ]; then
         running_perl=`which perl`
         $running_perl ${APP_DIR}/deploy/merge_config.pl $actual_config $sample_config $MOJO_MODE
   else
-        echo cannot find the config file $actual_config and $sample_config
+        echo cannot find the config files $actual_config and $sample_config
   fi
 }
 
