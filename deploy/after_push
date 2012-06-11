@@ -38,7 +38,7 @@ copy_encrypted_config() {
 	sample_config=${APP_DIR}/conf/sample.yml
 
      
-  if [ -f $actual_config ]; then
+  if [ -f "$actual_config" ] && [ -f "$sample_config" ]; then
         running_perl=`which perl`
         $running_perl ${APP_DIR}/deploy/merge_config.pl $actual_config $sample_config $MOJO_MODE
   else
