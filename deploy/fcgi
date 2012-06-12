@@ -93,6 +93,6 @@ __check_perl_module_version() {
 		 version=`pmvers $1`
 		 echo $version
   else
-     echo 0 
+     echo "0" 
   fi
 }
