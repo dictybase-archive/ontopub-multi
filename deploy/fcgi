@@ -87,12 +87,13 @@ after_create_daemontools_runfile() {
 __check_perl_module_version() {
 	local module=$1
 	local perl=`which perl`
+	local value=0.0
 
 	$perl -M$module -e '' > /dev/null 2>&1
 	if [ $? -eq 0 ]; then
 		 version=`pmvers $1`
 		 echo $version
   else
-     echo "0" 
+     echo $value
   fi
 }
