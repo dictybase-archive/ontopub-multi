@@ -23,14 +23,14 @@ before_install_dependencies() {
 	local mojolicious=1.21
 
 	local version= `__check_perl_module_version DBIx::Class`
-	if [ `echo "$version < $dbic" | bc` -eq 1 ];then
+	if [ `echo "$version < $dbic" | bc` -eq "1" ];then
      echo "------> Installing DBIx::Class 0.08127"
      carton install http://cpan.metacpan.org/authors/id/A/AB/ABRAXXA/DBIx-Class-0.08127.tar.gz
    fi
 
 
 	version= `__check_perl_module_version Modware`
-	if [ `echo "$version < $modware" | bc` -eq 1 ];then
+	if [ `echo "$version < $modware" | bc` -eq "1" ];then
      echo " -----> Installing modware"
      curl -o modware.tar.gz -s -k -L https://github.com/dictyBase/Modware/tarball/develop \
                           && carton install modware.tar.gz && rm modware.tar.gz
@@ -38,7 +38,7 @@ before_install_dependencies() {
 
 
 	version= `__check_perl_module_version Mojolicious`
-	if [ `echo "$version < $mojolicious" | bc` -eq 1 ];then
+	if [ `echo "$version < $mojolicious" | bc` -eq "1" ];then
      echo " ----> Installing mojolicious 1.21"
      curl -o mojolicious.tar.gz -s -k -L https://github.com/kraih/mojo/tarball/v1.21 \
                         && carton install mojolicious.tar.gz && rm mojolicious.tar.gz
@@ -93,6 +93,6 @@ __check_perl_module_version() {
 		 version=`pmvers $1`
 		 echo $version
   else
-     echo 0.0 
+     echo 0 
   fi
 }
