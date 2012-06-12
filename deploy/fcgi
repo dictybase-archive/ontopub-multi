@@ -17,18 +17,29 @@ after_install_dependencies() {
 }
 
 before_install_dependencies() {
+	
+	local dbic=0.08127
+	local modware=0.0012
+	local mojolicious=1.21
 
-echo "------> Installing DBIx::Class 0.08127"
-carton install http://cpan.metacpan.org/authors/id/A/AB/ABRAXXA/DBIx-Class-0.08127.tar.gz
+	if [ `__check_perl_module_version DBIx::Class` -ne $dbic ];then
+     echo "------> Installing DBIx::Class 0.08127"
+     carton install http://cpan.metacpan.org/authors/id/A/AB/ABRAXXA/DBIx-Class-0.08127.tar.gz
+   fi
 
-echo " -----> Installing modware"
-curl -o modware.tar.gz -s -k -L https://github.com/dictyBase/Modware/tarball/develop \
-    && carton install modware.tar.gz && rm modware.tar.gz
 
-echo " ----> Installing mojolicious 1.21"
-curl -o mojolicious.tar.gz -s -k -L https://github.com/kraih/mojo/tarball/v1.21 \
-    && carton install mojolicious.tar.gz && rm mojolicious.tar.gz
-  return
+	if [ `__check_perl_module_version Modware` -ne $modware ];then
+     echo " -----> Installing modware"
+     curl -o modware.tar.gz -s -k -L https://github.com/dictyBase/Modware/tarball/develop \
+                          && carton install modware.tar.gz && rm modware.tar.gz
+  fi
+
+
+	if [ `__check_perl_module_version Modware` -ne $mojolicious ];then
+     echo " ----> Installing mojolicious 1.21"
+     curl -o mojolicious.tar.gz -s -k -L https://github.com/kraih/mojo/tarball/v1.21 \
+                        && carton install mojolicious.tar.gz && rm mojolicious.tar.gz
+  fi
 }
 
 create_daemontools_runfile(){
@@ -70,4 +81,17 @@ after_create_daemontools_runfile() {
 		chmod 755 $RUN_FILE
 		ln -s $APP_SERVICE /service/${PROJECT}
 	fi
+}
+
+__check_perl_module_version() {
+	local module=$1
+	local perl=`which perl`
+
+	$perl -M$module -e '' > /dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		 version=`pmvers $1`
+		 echo $version
+  else
+     echo none 
+  fi
 }
