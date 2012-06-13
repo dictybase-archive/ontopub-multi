@@ -17,6 +17,9 @@ after_install_dependencies() {
 }
 
 before_install_dependencies() {
+
+
+  carton install Devel::Loaded
 	
 	local dbic=0.08127
 	local modware=0.0012
@@ -38,7 +41,6 @@ before_install_dependencies() {
    fi
 
 	local modware_version=`__check_perl_module_version Modware`
-	echo got installed version $modware_version
 	if [ `echo "$modware_version < $modware" | bc` -eq 1 ];then
      echo " -----> Installing modware"
      curl -o modware.tar.gz -s -k -L https://github.com/dictyBase/Modware/tarball/develop \
@@ -51,6 +53,7 @@ before_install_dependencies() {
      curl -o mojolicious.tar.gz -s -k -L https://github.com/kraih/mojo/tarball/v1.21 \
                         && carton install mojolicious.tar.gz && rm mojolicious.tar.gz
   fi
+
 }
 
 create_daemontools_runfile() {
@@ -99,7 +102,7 @@ __check_perl_module_version() {
 
 	$perl -Ilocal/lib/perl5 -M$module -e '' > /dev/null 2>&1
 	if [ $? -eq 0 ]; then
-		local version=`pmvers $module`
+		local version=`carton exec pmvers $module`
 		echo $version
   else
      echo $value
