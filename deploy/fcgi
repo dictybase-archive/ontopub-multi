@@ -21,14 +21,21 @@ before_install_dependencies() {
 	local dbic=0.08127
 	local modware=0.0012
 	local mojolicious=1.21
+	local bundle=0.005
 
 	local dbic_version=`__check_perl_module_version DBIx::Class`
-	echo got installed version $dbic_version
 	if [ `echo "$dbic_version < $dbic" | bc` -eq 1 ];then
      echo "------> Installing DBIx::Class 0.08127"
      carton install http://cpan.metacpan.org/authors/id/A/AB/ABRAXXA/DBIx-Class-0.08127.tar.gz
    fi
 
+	local bundle_version=`__check_perl_module_version Mojolicious::Plugin::Bundle`
+	if [ `echo "$bundle_version < $bundle" | bc` -eq 1 ];then
+     echo "------> Installing Mojolicious::Plugin::Bundle 0.005"
+     local url=https://github.com/downloads/dictyBase/Mojolicious-PluginBundle/Mojolicious-Plugin-Bundle-0.005.tar.gz
+     curl -o mojolicious-plugin-bundle.tar.gz -s -k -L $url \
+          && carton install mojolicious-plugin-bundle.tar.gz && rm mojolicious-plugin-bundle.tar.gz
+   fi
 
 	local modware_version=`__check_perl_module_version Modware`
 	echo got installed version $modware_version
