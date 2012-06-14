@@ -3,23 +3,8 @@ use strict;
 use warnings;
 use Module::Build;
 
-my $test_code = q{sub ACTION_test {
-    use File::Spec::Functions;
-	my ($self) = @_;
-	my $conf = catfile($self->base_dir, 'conf',  'test.yaml');
-	die "***test.yaml*** must exist in conf folder:$!" if !-e $conf;
-	my $exist_mode = $ENV{MOJO_MODE} if defined $ENV{MOJO_MODE};
-	$ENV{MOJO_MODE} = 'test';
-	$self->SUPER::ACTION_test(@_);
-	$ENV{MOJO_MODE} = $exist_mode if defined $exist_mode;
-}};
 
-my $class = Module::Build->subclass(
-    class => 'MyBuilder',
-    code  => $test_code
-);
-
-my $builder = $class->new(
+my $builder = Module::Build->new(
     module_name  => 'OntoPub',
     license      => 'perl',
     dist_author  => 'Siddhartha Basu <siddhartha-basu@northwestern.edu>',
