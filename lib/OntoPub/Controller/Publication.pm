@@ -16,8 +16,6 @@ sub show {
         $self->setup_citation($pub);
         $self->setup_linkouts($pub);
         $self->setup_body($pub);
-        #$self->included_genes($pub);
-        #$self->topics($pub);
         $self->render('show');
     }
     else {
@@ -34,8 +32,6 @@ sub show_pubmed {
         $self->setup_citation($pub);
         $self->setup_linkouts($pub);
         $self->setup_body($pub);
-        $self->included_genes($pub);
-        $self->topics($pub);
         $self->render('show');
     }
     else {
